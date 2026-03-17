@@ -8,11 +8,6 @@ on:
       # Set your base branch name here
       - main
 
-permissions:
-  # These permissions are required for workload identity federation.
-  id-token: write
-  contents: read
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -20,8 +15,9 @@ jobs:
     environment: Prod
     env:
       DATABRICKS_AUTH_TYPE: github-oidc
-      DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
-      DATABRICKS_CLIENT_ID: ${{ secrets.DB_CLIENT_ID }} # This is the service principal UUID.
+      DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+      DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }} # This is the service principal UUID.
+      DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }} # This is the service principal secret.
 
     steps:
       - uses: actions/checkout@v3
