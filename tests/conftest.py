@@ -33,6 +33,12 @@ def spark() -> SparkSession:
 
 
 @pytest.fixture()
+def workspace_client() -> WorkspaceClient:
+    """Provide a WorkspaceClient fixture for tests."""
+    return WorkspaceClient()
+
+
+@pytest.fixture()
 def load_fixture(spark: SparkSession):
     """Provide a callable to load JSON or CSV from fixtures/ directory.
 
