@@ -2,6 +2,10 @@ import argparse
 from databricks.sdk import WorkspaceClient
 
 
+def copy_files(w: WorkspaceClient, source: str, destination: str, recursive: bool = False):
+    w.dbutils.fs.cp(source, destination, recurse=recursive)
+
+
 def main():
     parser = argparse.ArgumentParser(description="Copy files using dbutils")
     parser.add_argument("--source", required=True, help="Source path")
@@ -14,7 +18,7 @@ def main():
     args = parser.parse_args()
 
     w = WorkspaceClient()
-    w.dbutils.fs.cp(args.source, args.destination, recurse=args.recursive)
+    copy_files(w, args.source, args.destination, args.recursive)
 
 
 if __name__ == "__main__":
