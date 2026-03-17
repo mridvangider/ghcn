@@ -18,6 +18,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
       - uses: databricks/setup-cli@main
       - name: Run unit tests
         run: databricks bundle run -- uv run pytest
@@ -35,6 +37,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
       - uses: databricks/setup-cli@main
       - name: Deploy bundle
         run: databricks bundle deploy --target dev
